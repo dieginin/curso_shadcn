@@ -1,6 +1,8 @@
 // https://tailwindcomponents.com/component/tailwind-css-admin-dashboard-layout
 // https://gist.github.com/Klerith/3949f1c8b884d7101e378dfb668f0f3a
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
 import Link from "next/link"
 
 const links = [
@@ -11,6 +13,7 @@ const links = [
   { name: "dialog", href: "dialog" },
   { name: "badge", href: "badge" },
   { name: "calendar", href: "calendar" },
+  { name: "avatar", href: "avatar" },
 ].sort((a, b) => a.name.localeCompare(b.name))
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -85,9 +88,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </div>
             <div className='flex items-center'>
               {/* User Avatar */}
-              <div className='flex items-center justify-center w-12 h-12 p-2 text-white bg-blue-500 rounded-full'>
-                FH
-              </div>
+              <Avatar>
+                <AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
             </div>
           </div>
         </div>
