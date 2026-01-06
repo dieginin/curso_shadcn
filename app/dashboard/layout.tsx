@@ -20,6 +20,7 @@ const links = [
   { name: "command", href: "command" },
   { name: "combobox", href: "combobox" },
   { name: "context menu", href: "context-menu" },
+  { name: "menubar", href: "menubar" },
 ].sort((a, b) => a.name.localeCompare(b.name))
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -136,7 +137,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               </div>
             </div>
           </main>
-          <footer className='p-4 mx-4 my-6 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 xl:p-8'>
+          <footer className='p-4 mx-4 my-6 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 xl:p-8 print:hidden'>
             <ul className='flex flex-wrap items-center mb-6 md:mb-0'>
               <li>
                 <a href='#' className='mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6'>
@@ -208,7 +209,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               </a>
             </div>
           </footer>
-          <p className='my-10 text-sm text-center text-gray-500'>
+          <p className='my-10 text-sm text-center text-gray-500 print:hidden'>
             &copy; 2019-{new Date().getFullYear()}{" "}
             <a href='#' className='hover:underline' target='_blank'>
               Themesberg
