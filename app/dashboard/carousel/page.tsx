@@ -6,6 +6,7 @@ export default function Page() {
     <div className='flex justify-center w-full'>
       <Carousel
         className='w-full max-w-xs'
+        autoPlay={2500}
         opts={{
           // dragFree: true,
           loop: true,
