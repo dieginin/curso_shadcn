@@ -19,6 +19,7 @@ const links = [
   { name: "checkbox", href: "checkbox" },
   { name: "command", href: "command" },
   { name: "combobox", href: "combobox" },
+  { name: "context menu", href: "context-menu" },
 ].sort((a, b) => a.name.localeCompare(b.name))
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
