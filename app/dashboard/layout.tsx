@@ -21,6 +21,7 @@ const links = [
   { name: "combobox", href: "combobox" },
   { name: "context menu", href: "context-menu" },
   { name: "menubar", href: "menubar" },
+  { name: "input otp", href: "input-otp" },
 ].sort((a, b) => a.name.localeCompare(b.name))
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
