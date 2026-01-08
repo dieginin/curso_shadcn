@@ -124,6 +124,22 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
             </SelectGroup>
           </SelectContent>
         </Select>
+
+        <Select onValueChange={value => table.setPageSize(+value)} defaultValue='10'>
+          <SelectTrigger>
+            <SelectValue placeholder='10 rows' />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Rows per page</SelectLabel>
+              <SelectItem value='10'>10 rows</SelectItem>
+              <SelectItem value='20'>20 rows</SelectItem>
+              <SelectItem value='30'>30 rows</SelectItem>
+              <SelectItem value='50'>50 rows</SelectItem>
+              <SelectItem value='100'>100 rows</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </div>
 
       <div className='overflow-hidden border rounded-md'>
