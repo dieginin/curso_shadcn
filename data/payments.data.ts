@@ -25,7 +25,7 @@ const randomEmail = (clientName: string) => {
   return `${clientName}@${randomDomain}`
 }
 
-export const payments: Payment[] = Array.from({ length: 100 }, () => {
+export const payments: Payment[] = Array.from({ length: 500 }, () => {
   const randomName = uniqueNamesGenerator(config)
 
   return {
