@@ -31,6 +31,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Payment } from "@/data/payments.data"
+import { Trash } from "lucide-react"
 import { useState } from "react"
 
 interface DataTableProps<TData, TValue> {
@@ -43,6 +45,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [statusFilter, setStatusFilter] = useState("all")
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  const [rowSelection, setRowSelection] = useState({})
 
   const table = useReactTable({
     data,
@@ -54,8 +57,11 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
-    state: { sorting, columnFilters, columnVisibility },
+    onRowSelectionChange: setRowSelection,
+    state: { sorting, columnFilters, columnVisibility, rowSelection },
   })
+
+  const hasSelectedRows = !!table.getFilteredSelectedRowModel().rows.length
 
   return (
     <div className='grid gap-4'>
@@ -156,13 +162,31 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
         </Table>
       </div>
 
-      <div className='flex items-center justify-end gap-2'>
-        <Button variant='outline' size='sm' onClick={table.previousPage} disabled={!table.getCanPreviousPage()}>
-          Previous
-        </Button>
-        <Button variant='outline' size='sm' onClick={table.nextPage} disabled={!table.getCanNextPage()}>
-          Next
-        </Button>
+      <div className='flex items-center justify-between'>
+        <div className='flex text-sm text-muted-foreground'>
+          {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} row(s)
+          selected.
+        </div>
+        <div className='flex gap-2'>
+          {hasSelectedRows && (
+            <Button
+              size='sm'
+              variant='destructive'
+              onClick={() => {
+                const ids = table.getSelectedRowModel().rows.map(row => (row.original as Payment).clientName)
+                console.log(ids)
+              }}
+            >
+              <Trash className='w-4 h-4' /> Delete {table.getFilteredSelectedRowModel().rows.length}
+            </Button>
+          )}
+          <Button variant='outline' size='sm' onClick={table.previousPage} disabled={!table.getCanPreviousPage()}>
+            Previous
+          </Button>
+          <Button variant='outline' size='sm' onClick={table.nextPage} disabled={!table.getCanNextPage()}>
+            Next
+          </Button>
+        </div>
       </div>
     </div>
   )
