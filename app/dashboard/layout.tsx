@@ -36,7 +36,7 @@ const links = [
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <nav className='fixed z-30 w-full bg-white border-b border-gray-200'>
+      <nav className='fixed z-30 w-full border-b border-border bg-background'>
         <div className='px-3 py-3 lg:px-5 lg:pl-3'>
           <div className='flex items-center justify-between'>
             <div className='flex items-center justify-start'>
@@ -44,7 +44,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 id='toggleSidebarMobile'
                 aria-expanded='true'
                 aria-controls='sidebar'
-                className='p-2 mr-2 text-gray-600 rounded cursor-pointer lg:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100'
+                className='p-2 mr-2 rounded cursor-pointer text-foreground lg:hidden hover:text-muted hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100'
               >
                 <svg
                   id='toggleSidebarMobileHamburger'
@@ -113,21 +113,21 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
         </div>
       </nav>
-      <div className='flex pt-16 overflow-hidden bg-white'>
+      <div className='flex pt-16 overflow-hidden bg-background'>
         <aside
           id='sidebar'
           className='fixed top-0 left-0 z-20 flex-col hidden w-64 h-full pt-16 duration-75 lg:flex shrink-0 transition-width'
           aria-label='Sidebar'
         >
-          <div className='relative flex flex-col flex-1 min-h-0 pt-0 bg-white border-gray-200 borderR'>
+          <div className='relative flex flex-col flex-1 min-h-0 pt-0 border-border bg-background borderR'>
             <div className='flex flex-col flex-1 pt-5 pb-4 overflow-y-auto'>
-              <div className='flex-1 px-3 space-y-1 bg-white divide-y'>
+              <div className='flex-1 px-3 space-y-1 divide-y bg-background'>
                 <ul className='pb-2 space-y-2'>
                   {links.map(link => (
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className='flex items-center p-2 text-base font-normal text-gray-900 capitalize rounded-lg hover:bg-gray-100 group'
+                        className='flex items-center p-2 text-base font-normal capitalize rounded-lg text-foreground hover:bg-muted group'
                       >
                         <span className='ml-3'>{link.name}</span>
                       </Link>
@@ -138,45 +138,45 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </div>
           </div>
         </aside>
-        <div className='fixed inset-0 z-10 hidden bg-gray-900 opacity-50' id='sidebarBackdrop'></div>
-        <div id='main-content' className='relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64'>
+        <div className='fixed inset-0 z-10 hidden opacity-50 bg-muted' id='sidebarBackdrop'></div>
+        <div id='main-content' className='relative w-full h-full overflow-y-auto bg-muted/20 lg:ml-64'>
           <main>
             <div className='px-4 pt-6'>
               <div className='w-full min-h-[calc(100vh-230px)]'>
-                <div className='p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8'>{children}</div>
+                <div className='p-4 rounded-lg shadow bg-background sm:p-6 xl:p-8'>{children}</div>
               </div>
             </div>
           </main>
-          <footer className='p-4 mx-4 my-6 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 xl:p-8 print:hidden'>
+          <footer className='p-4 mx-4 my-6 rounded-lg shadow bg-background md:flex md:items-center md:justify-between md:p-6 xl:p-8 print:hidden'>
             <ul className='flex flex-wrap items-center mb-6 md:mb-0'>
               <li>
-                <a href='#' className='mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6'>
+                <a href='#' className='mr-4 text-sm font-normal text-muted-foreground hover:underline md:mr-6'>
                   Terms and conditions
                 </a>
               </li>
               <li>
-                <a href='#' className='mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6'>
+                <a href='#' className='mr-4 text-sm font-normal text-muted-foreground hover:underline md:mr-6'>
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href='#' className='mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6'>
+                <a href='#' className='mr-4 text-sm font-normal text-muted-foreground hover:underline md:mr-6'>
                   Licensing
                 </a>
               </li>
               <li>
-                <a href='#' className='mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6'>
+                <a href='#' className='mr-4 text-sm font-normal text-muted-foreground hover:underline md:mr-6'>
                   Cookie Policy
                 </a>
               </li>
               <li>
-                <a href='#' className='text-sm font-normal text-gray-500 hover:underline'>
+                <a href='#' className='text-sm font-normal text-muted-foreground hover:underline'>
                   Contact
                 </a>
               </li>
             </ul>
             <div className='flex space-x-6 sm:justify-center'>
-              <a href='#' className='text-gray-500 hover:text-gray-900'>
+              <a href='#' className='text-muted-foreground hover:text-muted'>
                 <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 24 24' aria-hidden='true'>
                   <path
                     fillRule='evenodd'
@@ -185,7 +185,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   />
                 </svg>
               </a>
-              <a href='#' className='text-gray-500 hover:text-gray-900'>
+              <a href='#' className='text-muted-foreground hover:text-muted'>
                 <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 24 24' aria-hidden='true'>
                   <path
                     fillRule='evenodd'
@@ -194,12 +194,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   />
                 </svg>
               </a>
-              <a href='#' className='text-gray-500 hover:text-gray-900'>
+              <a href='#' className='text-muted-foreground hover:text-muted'>
                 <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 24 24' aria-hidden='true'>
                   <path d='M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84' />
                 </svg>
               </a>
-              <a href='#' className='text-gray-500 hover:text-gray-900'>
+              <a href='#' className='text-muted-foreground hover:text-muted'>
                 <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 24 24' aria-hidden='true'>
                   <path
                     fillRule='evenodd'
@@ -208,7 +208,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   />
                 </svg>
               </a>
-              <a href='#' className='text-gray-500 hover:text-gray-900'>
+              <a href='#' className='text-muted-foreground hover:text-muted'>
                 <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 24 24' aria-hidden='true'>
                   <path
                     fillRule='evenodd'
@@ -219,7 +219,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               </a>
             </div>
           </footer>
-          <p className='my-10 text-sm text-center text-gray-500 print:hidden'>
+          <p className='my-10 text-sm text-center text-muted-foreground print:hidden'>
             &copy; 2019-{new Date().getFullYear()}{" "}
             <a href='#' className='hover:underline' target='_blank'>
               Themesberg
