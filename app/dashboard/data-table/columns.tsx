@@ -1,5 +1,7 @@
 "use client"
 
+import { ChevronDown, ChevronUp, ChevronsUpDown, MoreHorizontal } from "lucide-react"
+import { ColumnDef, SortDirection } from "@tanstack/react-table"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,19 +13,38 @@ import {
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ColumnDef } from "@tanstack/react-table"
-import { MoreHorizontal } from "lucide-react"
 import { Payment } from "@/data/payments.data"
 import { toast } from "sonner"
+
+const SortedIcon = ({ isSorted }: { isSorted: SortDirection | false }) => {
+  const className = "w-4 h-4 ml-2 transition-all"
+  return isSorted === "asc" ? (
+    <ChevronUp className={className} />
+  ) : isSorted === "desc" ? (
+    <ChevronDown className={className} />
+  ) : (
+    <ChevronsUpDown className={className} />
+  )
+}
 
 export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "clientName",
-    header: "Client Name",
+    header: ({ column }) => (
+      <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+        Client Name
+        <SortedIcon isSorted={column.getIsSorted()} />
+      </Button>
+    ),
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: ({ column }) => (
+      <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+        Status
+        <SortedIcon isSorted={column.getIsSorted()} />
+      </Button>
+    ),
     cell: ({ row }) => {
       const status: string = row.getValue("status")
       const variant = ({
@@ -42,7 +63,14 @@ export const columns: ColumnDef<Payment>[] = [
   },
   {
     accessorKey: "amount",
-    header: () => <div className='text-right'>Amount</div>,
+    header: ({ column }) => (
+      <div className='text-right'>
+        <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          Amount
+          <SortedIcon isSorted={column.getIsSorted()} />
+        </Button>
+      </div>
+    ),
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("amount"))
       const formatted = new Intl.NumberFormat("en-US", {
@@ -55,7 +83,12 @@ export const columns: ColumnDef<Payment>[] = [
   },
   {
     accessorKey: "email",
-    header: "Email",
+    header: ({ column }) => (
+      <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+        Email
+        <SortedIcon isSorted={column.getIsSorted()} />
+      </Button>
+    ),
   },
   {
     id: "actions",
