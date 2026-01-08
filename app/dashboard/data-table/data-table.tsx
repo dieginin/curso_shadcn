@@ -67,7 +67,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     <div className='grid gap-4'>
       <div className='flex items-center justify-between gap-2'>
         <Input
-          placeholder='Filter emails...'
+          placeholder='Filter anything... (client name, email, status)'
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
           onChange={event => {
             table.resetColumnFilters()

@@ -1,7 +1,7 @@
 "use client"
 
 import { ChevronDown, ChevronUp, ChevronsUpDown, MoreHorizontal } from "lucide-react"
-import { ColumnDef, SortDirection } from "@tanstack/react-table"
+import { ColumnDef, FilterFn, Row, SortDirection } from "@tanstack/react-table"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,6 +28,20 @@ const SortedIcon = ({ isSorted }: { isSorted: SortDirection | false }) => {
   )
 }
 
+const myCustomFilterFn: FilterFn<Payment> = (
+  row: Row<Payment>,
+  columnId: string,
+  filterValue: string,
+  addMeta: (meta: any) => void
+) => {
+  filterValue = filterValue.toLowerCase()
+
+  const filterParts = filterValue.split(" ")
+  const rowValues = `${row.original.email}${row.original.clientName}${row.original.status}`.toLocaleLowerCase()
+
+  return filterParts.every(filter => rowValues.includes(filter))
+}
+
 export const columns: ColumnDef<Payment>[] = [
   {
     id: "select",
@@ -50,6 +64,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
   {
     accessorKey: "clientName",
+    filterFn: myCustomFilterFn,
     header: ({ column }) => (
       <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
         Client Name
@@ -59,6 +74,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
   {
     accessorKey: "status",
+    filterFn: myCustomFilterFn,
     header: ({ column }) => (
       <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
         Status
@@ -103,6 +119,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
   {
     accessorKey: "email",
+    filterFn: myCustomFilterFn,
     header: ({ column }) => (
       <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
         Email
