@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Calendar as CalIcon } from "lucide-react"
 import { Calendar } from "@/components/ui/calendar"
 import { Input } from "@/components/ui/input"
+import { Switch } from "@/components/ui/switch"
 import { cn } from "@/lib/utils"
 import { format } from "date-fns"
 import { useForm } from "react-hook-form"
@@ -15,12 +16,15 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 type FormData = z.infer<typeof formSchema>
-const formSchema = z.object({
-  username: z.string().min(2).max(20),
-  email: z.email(),
-  gender: z.enum(["male", "female"], { error: "Must specify gender" }),
-  dateOfBirth: z.date(),
-})
+const formSchema = z
+  .object({
+    username: z.string().min(2).max(20),
+    email: z.email(),
+    gender: z.enum(["male", "female"], { error: "Must specify gender" }),
+    dateOfBirth: z.date(),
+    marketingEmails: z.boolean(),
+  })
+  .refine(data => data.marketingEmails === true, { error: "Must accept marketing emails", path: ["marketingEmails"] })
 
 export default function Page() {
   const form = useForm<FormData>({
@@ -28,6 +32,7 @@ export default function Page() {
     defaultValues: {
       username: "",
       email: "",
+      marketingEmails: false,
     },
   })
 
@@ -38,7 +43,7 @@ export default function Page() {
   return (
     <div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className='grid grid-cols-2 gap-4'>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
           <FormField
             control={form.control}
             name='username'
@@ -76,7 +81,7 @@ export default function Page() {
               <FormItem className='space-y-3'>
                 <FormLabel>Gender</FormLabel>
                 <FormControl>
-                  <RadioGroup defaultValue={field.value} onValueChange={field.onChange} className='flex gap-15'>
+                  <RadioGroup defaultValue={field.value} onValueChange={field.onChange} className='flex mx-auto gap-15'>
                     <FormItem className='flex items-center space-x-3 space-y-0'>
                       <FormControl>
                         <RadioGroupItem value='male' />
@@ -129,7 +134,25 @@ export default function Page() {
             )}
           />
 
-          <Button type='submit'>Submit</Button>
+          <FormField
+            control={form.control}
+            name='marketingEmails'
+            render={({ field }) => (
+              <FormItem className='col-span-1 sm:col-span-2'>
+                <div className='flex flex-row items-center justify-between p-3 border rounded-lg shadow-sm'>
+                  <FormLabel>Marketing Emails</FormLabel>
+                  <FormControl>
+                    <Switch checked={field.value} onCheckedChange={field.onChange} />
+                  </FormControl>
+                </div>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <Button type='submit' className='col-span-1 sm:col-span-2'>
+            Submit
+          </Button>
         </form>
       </Form>
     </div>
