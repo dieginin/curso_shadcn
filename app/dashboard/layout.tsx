@@ -29,6 +29,7 @@ const links = [
   { name: "sonner", href: "sonner" },
   { name: "tabs", href: "tabs" },
   { name: "Data Table", href: "data-table" },
+  { name: "Form", href: "form" },
 ].sort((a, b) => a.name.localeCompare(b.name))
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
